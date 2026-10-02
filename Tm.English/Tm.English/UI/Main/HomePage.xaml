@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Tm.English"
+             xmlns:ctr="clr-namespace:Tm.English.Controls"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="Tm.English.UI.HomePage"
+             Title="{Binding Title}" BackgroundColor="White">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_settings.png" Command="{Binding SettingsCommand}"  />
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <ScrollView VerticalOptions="FillAndExpand">
+            <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ctr:SeparatorLabel Text="Overview" />
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <BoxView HeightRequest="20" WidthRequest="20" BackgroundColor="{StaticResource BlueColor}" />
+                            <Label Text="{Binding Passed, StringFormat='Passed: {0:N0}'}" FontSize="Medium" HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                            <BoxView HeightRequest="20" WidthRequest="20" BackgroundColor="{StaticResource OrangeColor}"  />
+                            <Label Text="{Binding Rest, StringFormat='Rest: {0:N0}'}" FontSize="Medium" HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+                        <Label Text="{Binding Planned, StringFormat='Planned: {0:N0}'}" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                    <microcharts:ChartView Grid.Column="1" Chart="{Binding Chart}" HeightRequest="200" WidthRequest="200" 
+                                   HorizontalOptions="End" VerticalOptions="Center" />
+
+                </Grid>
+
+                <StackLayout Grid.Row="2">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                        <ctr:SeparatorLabel Text="History" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                        <Button Text="Show" Command="{Binding HistoryCommand}" HorizontalOptions="End" VerticalOptions="Center" />
+                    </StackLayout>
+                    <StackLayout VerticalOptions="Fill" >
+                        <Label Text="No records" IsVisible="{Binding HasHistoryData, Converter={StaticResource InverseBool}}" />
+                        <ListView x:Name="i_history_list" ItemsSource="{Binding HistoryList}" IsVisible="{Binding HasHistoryData}"
+                              SeparatorVisibility="Default">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextCell Text="{Binding DisplayName}" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+        <StackLayout Padding="10">
+            <Button Text="Scan Code" VerticalOptions="Center" HorizontalOptions="Center"
+                    BackgroundColor="{StaticResource OrangeColor}" TextColor="White" 
+                    Command="{Binding ScanQRCommand}" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

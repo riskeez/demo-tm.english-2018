@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             x:Class="Tm.English.UI.ScannerPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <Grid>
+            <zxing:ZXingScannerView x:Name="i_scanner" AutomationId="zxingScannerView"
+                                    IsScanning="{Binding IsScanning}" 
+                                    IsAnalyzing="{Binding IsAnalyzing}" 
+                                    Options="{Binding ScanOptions}"
+                                    Result="{Binding ScanResult, Mode=TwoWay}" 
+                                    ScanResultCommand="{Binding ScanResultCommand}" />
+            <!-- Overlay -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <BoxView Grid.Row="0" BackgroundColor="Black" Opacity="0.6" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
+                <BoxView Grid.Row="1" BackgroundColor="Red" Opacity="0.5" HeightRequest="3" 
+                         VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+                <BoxView Grid.Row="2" BackgroundColor="Black" Opacity="0.6" 
+                         HorizontalOptions="FillAndExpand" VerticalOptions="Fill" />
+                <Label Grid.Row="2" Text="Hold your device up to the QR Code" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

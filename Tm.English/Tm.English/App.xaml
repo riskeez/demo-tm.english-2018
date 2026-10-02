@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tm.English.App"
+             xmlns:converters="clr-namespace:Tm.English.Infrastructure.Converters"
+             xmlns:styles="clr-namespace:Tm.English.Infrastructure.Styles">
+	<Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <converters:Converters />
+                <styles:Styles />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+	</Application.Resources>
+</Application>

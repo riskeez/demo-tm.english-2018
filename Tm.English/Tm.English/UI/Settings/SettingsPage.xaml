@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tm.English.UI.SettingsPage"
+             xmlns:ctr="clr-namespace:Tm.English.Controls"
+             Title="Settings"
+             BackgroundColor="White"
+             Toolbar="{Binding ToolbarList}">
+    <TableView Intent="Settings">
+        <TableRoot>
+            <TableSection Title="General">
+                <EntryCell HorizontalTextAlignment="Center" Label="Lessons Per Month" Placeholder="Enter amount of lessons per month" 
+                           Text="{Binding LessonsPerMonth}" IsEnabled="{Binding IsEditMode}" />
+                <EntryCell HorizontalTextAlignment="Center" Label="Planned for Past Months" Placeholder="Enter planned for past months" 
+                           Text="{Binding PlannedPastMonths}" IsEnabled="{Binding IsEditMode}" />
+            </TableSection>
+            <TableSection Title="Security">
+                <TextCell Text="Scan Private Key" Detail="Initialize secret key for QR codes recognition"
+                          Command="{Binding SetPrivateKeyCommand}" />
+            </TableSection>
+            <TableSection Title="Storage">
+                <TextCell Text="Backup Data" Detail="{Binding LastBackup,StringFormat='Last backup: {0}'}"
+                          Command="{Binding BackupCommand}" />
+                <TextCell Text="Restore from backup" Detail="Restore data from backup file"
+                          Command="{Binding RestoreBackupCommand}" />
+                <TextCell Text="Reset Data" 
+                          Detail="Clear stored data"
+                          Command="{Binding ClearStorageCommand}" />
+            </TableSection>
+        </TableRoot>
+    </TableView>
+</ContentPage>
